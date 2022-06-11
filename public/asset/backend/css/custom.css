@@ -1,0 +1,43 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    }
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.badge-pending {
+    color: white;
+    background: #ffc107;
+    font-weight: bolder;
+    border-radius: 25px;
+    padding: 6px 8px 9px 8px;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+}
+
+.badge-success {
+    color: white;
+    background: green;
+    font-weight: bolder;
+    border-radius: 25px;
+    padding: 6px 11px 9px 11px;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+}
+
+.badge-cancel {
+    color: white;
+    background: #e52438;
+    font-weight: bolder;
+    border-radius: 25px;
+    padding: 6px 15px 9px 11px;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+}
