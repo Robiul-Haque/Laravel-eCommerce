@@ -41,7 +41,13 @@
                                         badge-success
                                     @elseif ($order->status == 'cancel')
                                         badge-cancel
-                                    @endif">{{ $order->status }}</span></td>
+                                    @endif">{{ $order->status }}</span>
+                                    @if ($order->seen_status == '0')
+                                        <span class="badge bg-secondary">Unseen</span>
+                                    @else
+                                    <span class="badge bg-success">Seen</span>
+                                    @endif
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary mx-1" href="{{ route('admin.orderView',$order->id) }}">View</a>
                                         <a class="btn btn-info mx-1" data-bs-toggle="modal" href="#exampleModal{{ $order->id }}">Edit</a>

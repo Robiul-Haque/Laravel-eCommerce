@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ResetPassword;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
-use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
@@ -65,7 +66,7 @@ class LoginController extends Controller
                 'token' => $data['token']
             ]);
             Mail::send('auth.email', $data, function ($message) use ($data) {
-                $message->from('maitfirm22@gmail.com', 'MaItFirm');
+                // $message->from();
                 $message->to($data['email']);
                 $message->subject('Forgot password');
             });
@@ -79,8 +80,8 @@ class LoginController extends Controller
 
     public function updatePassIndex($token)
     {
-        if (ResetPassword::where('token','=',$token)->first()) {
-            return view('auth.update_password',compact('token'));
+        if (ResetPassword::where('token', '=', $token)->first()) {
+            return view('auth.update_password', compact('token'));
         } else {
             Toastr::error('Your url is invalid!', '', ["positionClass" => "toast-bottom-right"]);
             return redirect()->route('login');
@@ -92,20 +93,70 @@ class LoginController extends Controller
         $req->validate([
             'password' => 'required|min:5|max:15|confirmed',
         ]);
-        $check = ResetPassword::where('token','=',$token)->first();
+        $check = ResetPassword::where('token', '=', $token)->first();
         if ($check) {
-            $userCheck = User::where('email','=',$check->email)->first();
+            $userCheck = User::where('email', '=', $check->email)->first();
             if ($userCheck) {
                 User::find($userCheck->id)->update([
                     'password' => Hash::make($req->input('password'))
                 ]);
-                ResetPassword::where('email','=',$userCheck->email)->delete();
+                ResetPassword::where('email', '=', $userCheck->email)->delete();
                 Toastr::success('Your password update successful', '', ["positionClass" => "toast-bottom-right"]);
                 return redirect()->route('login');
             }
         } else {
             Toastr::success('Your url is invalid', '', ["positionClass" => "toast-bottom-right"]);
             return redirect()->route('login');
+        }
+    }
+
+    public function google()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        $findUser = User::where('client_id', '=', $user->id)->first();
+        if ($findUser) {
+            Auth::login($findUser);
+            return redirect()->route('home');
+        } else {
+            $user = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'client_id' => $user->id,
+                'acount_type' => 'google',
+                'password' => Hash::make('Google12345')
+            ]);
+            Auth::login($user);
+            return redirect()->route('home');
+        }
+    }
+
+    public function facebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function facebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $findUser = User::where('client_id', '=', $user->id)->first();
+        if ($findUser) {
+            Auth::login($findUser);
+            return redirect()->route('home');
+        } else {
+            $user = User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                'client_id' => $user->id,
+                'acount_type' => 'facebook',
+                'password' => Hash::make('facebook12345')
+            ]);
+            Auth::login($user);
+            return redirect()->route('home');
         }
     }
 }

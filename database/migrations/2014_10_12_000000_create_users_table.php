@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('role')->default('customer');
             $table->string('password');
             $table->string('photo')->nullable()->default('user.png');
+            $table->string('client_id')->nullable();
+            $table->string('acount_type')->nullable();
             $table->timestamps();
         });
     }

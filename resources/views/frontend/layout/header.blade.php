@@ -11,7 +11,7 @@
               <li><a href="{{ route('profile') }}" class="text-white text-decoration-none">Profile</a></li>
               <li><a href="{{ route('logout') }}" class="text-white text-decoration-none">Logout</a></li>
             @else
-              <li><a href="{{ route('register')}}" class="text-white text-decoration-none">Register</a></li>
+              <li><a href="{{ route('register') }}" class="text-white text-decoration-none">Register</a></li>
               <li><a href="{{ route('login') }}" class="text-white text-decoration-none">Login</a></li>
             @endif
           </ul>

@@ -2,7 +2,7 @@
 @extends('frontend.index')
 @section('main')
   <div class="container" style="width: 35%">
-    <h2 class="text-center mb-4 mt-2">Regester!</h2>
+    <h2 class="text-center mb-4 mt-2">Register!</h2>
     @if (\session()->has('message'))
       <ul class="alert alert-success text-message" role="alert">
         <li class="ms-2">{{ \session()->get('message') }}</li>

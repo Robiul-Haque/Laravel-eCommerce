@@ -26,6 +26,14 @@
             <div class="text-center">
                 <button type="submit" class="btn btn-primary mt-2">Log-In</button>
             </div>
+            <div class="my-3">
+                <p class="text-center text-secondary">Another login with</p>
+                <div class="text-center">
+                    <a class="btn btn-light d-inline" href="{{ route('google') }}"><img src="{{ asset('asset/image/google-logo.png') }}" width="6%"> Google</a>
+                    <span class="mx-2 text-secondary">or</span>
+                    <a class="btn btn-light d-inline" href="{{ route('facebook') }}"><img src="{{ asset('asset/image/logo-Meta.png') }}" width="6%"> Facebook</a>
+                </div>
+            </div>
         </form>
     </main>
 @endsection

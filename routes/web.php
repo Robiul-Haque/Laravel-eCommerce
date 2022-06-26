@@ -13,10 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// SSLCOMMERZ Start
+// Route::get('/example1', [\App\Http\Controllers\SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [\App\Http\Controllers\SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [\App\Http\Controllers\SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [\App\Http\Controllers\SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [\App\Http\Controllers\SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [\App\Http\Controllers\SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [\App\Http\Controllers\SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [\App\Http\Controllers\SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
+
+
 Route::get('/', [\App\Http\Controllers\Frontend\FrontendController::class, 'home'])->name('home');
 
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])->name('login');
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::get('/auth/google', [\App\Http\Controllers\Auth\LoginController::class, 'google'])->name('google');
+Route::post('/auth/google/callback', [\App\Http\Controllers\Auth\LoginController::class, 'googleCallback']);
+Route::get('/auth/facebook', [\App\Http\Controllers\Auth\LoginController::class, 'facebook'])->name('facebook');
+Route::post('/auth/facebook/callback', [\App\Http\Controllers\Auth\LoginController::class, 'facebookcallback']);
 Route::get('forgot/password', [\App\Http\Controllers\Auth\LoginController::class, 'forgotPasswordIndex'])->name('forgot.password');
 Route::post('forgot/password', [\App\Http\Controllers\Auth\LoginController::class, 'forgotPassword']);
 Route::get('update/password/{token}', [\App\Http\Controllers\Auth\LoginController::class, 'updatePassIndex'])->name('update.password');

@@ -19,6 +19,7 @@ class OrderController extends Controller
     public function orderView($id)
     {
         $order = Order::where('id', $id)->first();
+        $order->find($id)->update(['seen_status' => '1']);
         $orderDetails = OrderDetails::where('order_id', $id)->get();
         return view('backend.orderView', compact('order', 'orderDetails'));
     }

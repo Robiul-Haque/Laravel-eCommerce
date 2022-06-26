@@ -11,6 +11,12 @@
           <a class="nav-link {{ request()->is('order') ? 'active' : '' }}" href="{{ route('admin.orderIndex') }}">
             <span data-feather="file"></span>
             Orders
+            @php
+              $count = \App\Models\Order::where('seen_status','=','0')->count();
+            @endphp
+            @if ($count>'0')
+              <span class="bg-danger text-white px-2 rounded-circle"><b>{{ $count }}</b></span>
+            @endif
           </a>
         </li>
         <li class="nav-item">

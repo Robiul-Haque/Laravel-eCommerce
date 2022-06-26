@@ -79,7 +79,7 @@
                             <td>{{ $order->status }}</td>
                             <td>
                                 <a class="btn btn-primary mx-1" href="{{ route('order.show',$order->id) }}">View</a>
-                                <a class="btn btn-info mx-1" href="{{ route('order.invoice',$order->id) }}" target="_blank">Invoice</a>
+                                {{-- <a class="btn btn-info mx-1" href="{{ route('order.invoice',$order->id) }}" target="_blank">Invoice</a> --}}
                             </td>
                         </tr>
                         @endforeach

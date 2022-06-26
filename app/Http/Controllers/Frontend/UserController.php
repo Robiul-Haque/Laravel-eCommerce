@@ -44,7 +44,7 @@ class UserController extends Controller
         ];
         User::create($inputs);
         Session::flash('message', 'Regester successfully');
-        return redirect()->route('regester');
+        return redirect()->route('register');
     }
 
     public function profile()

@@ -24,7 +24,8 @@ return new class extends Migration
             $table->integer('qty');
             $table->string('status')->default('pending');
             $table->string('payment_method');
-            $table->string('txn_id')->unique();
+            $table->string('transaction_id')->unique();
+            $table->enum('seen_status',['0','1'])->default('0');
             $table->timestamps();
         });
     }
